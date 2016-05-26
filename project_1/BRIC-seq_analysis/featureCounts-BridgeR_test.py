@@ -3,7 +3,7 @@
 featureCounts-BridgeR workflow.
 
 Usage:
-  featureCounts-BridgeR_test.py <file_table> [options]
+  featureCounts-BridgeR_test.py <file_table>
 """
 
 import sys
@@ -39,19 +39,19 @@ for line in open(sys.argv[1], 'r'):
     if file_name == 'gtf' or file_name == 'anno':
         continue
     cmd_1 = "featureCounts -T 8 -t exon -g gene_id -a " + gtf_path + " -o featureCounts_result_" + file_name + ".txt " + file_path
-    #subprocess.call(cmd_1, shell = True)
+    subprocess.call(cmd_1, shell = True)
     cmd_2 = 'sed -e "1,2d" featureCounts_result_' + file_name + '.txt > featureCounts_result_' + file_name + '_pre.txt'
-    #subprocess.call(cmd_2, shell = True)
+    subprocess.call(cmd_2, shell = True)
     cmd_3 = 'python3 featureCounts_filecheck.py featureCounts_result_' + file_name + '_pre.txt featureCounts_result_' + file_name + '_for_R.txt'
-    #subprocess.call(cmd_3, shell = True)
+    subprocess.call(cmd_3, shell = True)
     cmd_4 = 'rm featureCounts_result_' + file_name + '_pre.txt'
-    #subprocess.call(cmd_4, shell = True)
+    subprocess.call(cmd_4, shell = True)
     result_file = 'featureCounts_result_' + file_name + '_for_R.txt'
     gene_list.append(result_file)
 
 # Merge each sample file
 cmd_5 = "Rscript calc_rpkm.R " + " ".join(gene_list)
-#subprocess.call(cmd_5, shell = True)
+subprocess.call(cmd_5, shell = True)
 
 # Gene name,type infor
 ref_dict = {}
@@ -65,13 +65,22 @@ for line in open(anno_path, 'r'):
 
 # Annotate gene infor
 output_file = open("BridgeR_input_file.txt", 'w')
+print("gene_id", "gene_symbol", "AkimitsuLab_gene_type", "Gencode_gene_type", "\t".join(gene_list), sep="\t", end="\n", file=output_file)
 for line in open("BridgeR_input_file.tmp", 'r'):
     line = line.rstrip()
     data = line.split("\t")
     gene_name = data[0]
     gene_infor = ref_dict[gene_name]
+    gene_infor_list = gene_infor.split("\t")
+    gene_type = gene_infor_list[2]
+    if gene_type == 'others':
+        continue
     rpkm_list = []
     for x in range(len(gene_list)):
         rpkm = data[2+x*2]
         rpkm_list.append(rpkm)
     print(gene_infor, "\t".join(rpkm_list), sep="\t", end="\n", file=output_file)
+
+#BridgeR calc
+cmd_6 = "Rscript BridgeR_analysis.R BridgeR_input_file.txt"
+subprocess.call(cmd_6, shell = True)
