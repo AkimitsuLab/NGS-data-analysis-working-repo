@@ -1,0 +1,13 @@
+gtf,/home/akimitsu/database/gencode.v19.annotation_filtered+PROMPT_v2+eRNA_v2+FANTOM_eRNA.gtf
+anno,/home/akimitsu/database/gencode.v19.annotation_filtered+PROMPT_v2+eRNA_v2+FANTOM_eRNA_symbol_type_list.txt
+Hela_0h,/home/akimitsu/data/BRIC-seq_HeLa_v2/tophat_out_DRR029126_BRIC_PolyAminus_Hela_0h/accepted_hits.bam
+Hela_1h,/home/akimitsu/data/BRIC-seq_HeLa_v2/tophat_out_DRR029130_BRIC_PolyAminus_Hela_1h/accepted_hits.bam
+Hela_1_5h,/home/akimitsu/data/BRIC-seq_HeLa_v2/tophat_out_DRR029139_BRIC_PolyAminus_Hela_90min/accepted_hits.bam
+Hela_2h,/home/akimitsu/data/BRIC-seq_HeLa_v2/tophat_out_DRR029131_BRIC_PolyAminus_Hela_2h/accepted_hits.bam
+Hela_3h,/home/akimitsu/data/BRIC-seq_HeLa_v2/tophat_out_DRR029133_BRIC_PolyAminus_Hela_3h/accepted_hits.bam
+Hela_4h,/home/akimitsu/data/BRIC-seq_HeLa_v2/tophat_out_DRR029135_BRIC_PolyAminus_Hela_4h/accepted_hits.bam
+Hela_5h,/home/akimitsu/data/BRIC-seq_HeLa_v2/tophat_out_DRR029136_BRIC_PolyAminus_Hela_5h/accepted_hits.bam
+Hela_6h,/home/akimitsu/data/BRIC-seq_HeLa_v2/tophat_out_DRR029137_BRIC_PolyAminus_Hela_6h/accepted_hits.bam
+Hela_8h,/home/akimitsu/data/BRIC-seq_HeLa_v2/tophat_out_DRR029138_BRIC_PolyAminus_Hela_8h/accepted_hits.bam
+Hela_10h,/home/akimitsu/data/BRIC-seq_HeLa_v2/tophat_out_DRR029127_BRIC_PolyAminus_Hela_10h/accepted_hits.bam
+Hela_12h,/home/akimitsu/data/BRIC-seq_HeLa_v2/tophat_out_DRR029128_BRIC_PolyAminus_Hela_12h/accepted_hits.bam
