@@ -16,4 +16,4 @@ for (arg in args) {
     }
 }
 
-write.table(result_file, quote = F, sep = "\t", col.name = F, file = paste("BridgeR_input_file.txt", sep=""))
+write.table(result_file, quote = F, sep = "\t", col.name = F, file = paste("BridgeR_input_file.tmp", sep=""))
