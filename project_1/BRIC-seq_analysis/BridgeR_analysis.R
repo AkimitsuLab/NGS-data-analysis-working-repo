@@ -1,10 +1,11 @@
 library(BridgeR)
-
+library(ggplot2)
 arg1 = commandArgs(trailingOnly=TRUE)[1]
 
 files <- c(arg1)
 hour <- c(0,1,1.5,2,3,4,5,6,8,10,12)
 group <- c("HeLa_ver2")
+InforColumn <- 4
 
 BridgeRCore(InputFiles = files,
             InforColumn=4,
