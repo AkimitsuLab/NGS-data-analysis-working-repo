@@ -73,13 +73,15 @@ for line in open("BridgeR_input_file.tmp", 'r'):
     gene_infor = ref_dict[gene_name]
     gene_infor_list = gene_infor.split("\t")
     gene_type = gene_infor_list[2]
-    if gene_type == 'others':
+    if gene_type in ['others', 'Akimitsu_eRNA', 'Akimitsu_PROMPT', 'FANTOM5_eRNA']:
         continue
     rpkm_list = []
     for x in range(len(gene_list)):
         rpkm = data[2+x*2]
         rpkm_list.append(rpkm)
     print(gene_infor, "\t".join(rpkm_list), sep="\t", end="\n", file=output_file)
+
+output_file.close()
 
 #BridgeR calc
 cmd_6 = "Rscript BridgeR_analysis.R BridgeR_input_file.txt"
