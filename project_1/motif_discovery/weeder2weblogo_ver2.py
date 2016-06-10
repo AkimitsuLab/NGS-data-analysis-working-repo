@@ -39,6 +39,8 @@ for line in input_file:
 		seq = data[2]
 		seq = seq.replace('[','')
 		seq = seq.replace(']','')
+		trans_table = str.maketrans("ATGCatgc","AUGCAUGC")
+		seq = seq.translate(trans_table)
 		# if re.search('TATATATA',seq):
 		# 	continue
 
