@@ -35,6 +35,7 @@ for line in input_file:
     tss_list = []
     tss_site_st = ''
     tss_site_ed = ''
+    tss_site_2 = ''
     trx_list_new = []
     if re.search('NM', data[1]):
         for x in trx_list:
@@ -45,26 +46,35 @@ for line in input_file:
     for x in trx_list_new:
         ref_list = ref_dict[x]
         chrom = ref_list[0]
-        st = ref_list[1]
-        ed = ref_list[2]
+        st = int(ref_list[1])
+        ed = int(ref_list[2])
         strand = ref_list[3]
         st_list.append(st)
         ed_list.append(ed)
         if strand == '+':
-            tss_list.append(str(st))
+            tss_list.append(int(st))
         elif strand == '-':
-            tss_list.append(str(ed))
+            tss_list.append(int(ed))
+        else:
+            tss_list.append(int(st))
     st_list.sort()
     ed_list.sort()
     if strand == '+':
         tss_list.sort()
         tss_site_ed = tss_list[-1]
-        tss_site_st = int(tss_site_ed) - 3000
-        print(chrom, str(tss_site_ed), str(ed_list[-1]), data[0], ','.join(trx_list_new), "GeneBody",data[2], sep="\t", end="\n", file=output_file)
+        tss_site_st = int(tss_list[0]) - 3000
+        print(chrom, str(tss_list[0]), str(ed_list[-1]), data[0], ','.join(trx_list_new), "GeneBody",data[2], sep="\t", end="\n", file=output_file)
         print(chrom, str(tss_site_st), str(tss_site_ed), data[0], ','.join(trx_list_new), "Promoter",data[2], sep="\t", end="\n", file=output_file_promoter)
+        if int(tss_site_st) > int(tss_site_ed):
+            print(data[2] + ': ' + ','.join(tss_list))
     elif strand == '-':
         tss_list.sort()
         tss_site_st = tss_list[0]
-        tss_site_ed = int(tss_site_st) + 3000
-        print(chrom, str(st_list[0]), str(tss_site_st), data[0], ','.join(trx_list_new), "GeneBody",data[2], sep="\t", end="\n", file=output_file)
+        tss_site_ed = int(tss_list[-1]) + 3000
+        print(chrom, str(st_list[0]), str(tss_list[-1]), data[0], ','.join(trx_list_new), "GeneBody",data[2], sep="\t", end="\n", file=output_file)
         print(chrom, str(tss_site_st), str(tss_site_ed), data[0], ','.join(trx_list_new), "Promoter",data[2], sep="\t", end="\n", file=output_file_promoter)
+        if int(tss_site_st) > int(tss_site_ed):
+            print(data[2] + ': ' + ','.join(tss_list))
+    else:
+        tss_list.sort()
+        print(chrom, str(st_list[0]), str(ed_list[-1]), data[0], ','.join(trx_list_new), "GeneBody",data[2], sep="\t", end="\n", file=output_file)
